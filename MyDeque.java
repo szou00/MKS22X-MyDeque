@@ -31,7 +31,7 @@ public class MyDeque<E>{
   }
 
   public void addFirst(E element){
-
+    
   }
   public void addLast(E element){ }
   // public E removeFirst(){ }
@@ -42,5 +42,6 @@ public class MyDeque<E>{
   public static void main(String[] args) {
     MyDeque<String> test = new MyDeque<String>(8);
     System.out.println(test);
+    System.out.println(test.size());
   }
 }
