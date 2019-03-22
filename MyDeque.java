@@ -71,6 +71,7 @@ public class MyDeque<E>{
     System.out.println(test);
     test.addFirst("c");
     System.out.println(test);
-
+    test.addFirst("d");
+    System.out.println(test);
   }
 }
