@@ -79,14 +79,31 @@ public class MyDeque<E>{
       start--;
       return first;
     }
+    if (start == size-1) {
+      data[start] = null;
+      start = 0;
+      return first;
+    }
     data[start] = null;
     start++;
     return first;
 
   }
-  // public E removeLast(){ }
-  // public E getFirst(){ }
-  // public E getLast(){ }
+
+  public E removeLast(){
+    E last = data[end];
+    data[end] = null;
+    end--;
+    return last;
+  }
+
+  public E getFirst(){
+    return data[start];
+  }
+
+  public E getLast(){
+    return data[end];
+  }
 
   @SuppressWarnings("unchecked")
   public void resize() {
@@ -117,5 +134,9 @@ public class MyDeque<E>{
     System.out.println(test);
     test.removeFirst();
     System.out.println(test);
+    test.removeLast();
+    System.out.println(test);
+    System.out.println(test.getFirst());
+    System.out.println(test.getLast());
   }
 }
