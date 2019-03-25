@@ -69,8 +69,21 @@ public class MyDeque<E>{
       resize();
     }
     data[end+1] = element;
+    end++;
   }
-  // public E removeFirst(){ }
+
+  public E removeFirst(){
+    E first = data[start];
+    if (start == 0) {
+      data[start] = null;
+      start--;
+      return first;
+    }
+    data[start] = null;
+    start++;
+    return first;
+
+  }
   // public E removeLast(){ }
   // public E getFirst(){ }
   // public E getLast(){ }
@@ -92,11 +105,17 @@ public class MyDeque<E>{
     // System.out.println(test.size());
     test.addFirst("c");
     System.out.println(test);
+    test.removeFirst();
+    System.out.println(test);
     test.addFirst("b");
     System.out.println(test);
     test.addFirst("a");
     System.out.println(test);
     test.addLast("d");
+    System.out.println(test);
+    test.addLast("e");
+    System.out.println(test);
+    test.removeFirst();
     System.out.println(test);
   }
 }
