@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.Arrays;
 
 public class MyDeque<E>{
   private E[] data;
@@ -61,8 +62,10 @@ public class MyDeque<E>{
         return;
       }
       if (data[start-1] != null) {
+        System.out.println("resizing");
         resize();
       }
+      // System.out.println(Arrays.toString(data));
       data[start-1] = element;
       start--;
       end++;
@@ -128,35 +131,46 @@ public class MyDeque<E>{
   @SuppressWarnings("unchecked")
   public void resize() {
     E[] newData = data = (E[])new Object[size *2];
+    String ans = "";
     for (int i = start; i<size;i++) {
       newData[i] = data[i];
     }
-    for (int i = 0; i<start;i++) {
-      newData[i] = data[i];
+    if (start > 0) {
+      for (int i = 0; i < start; i++) {
+        newData[i] = data[i];
+      }
     }
+    start = 0;
+    end = data.length;
+    data = newData;
+
   }
 
   public static void main(String[] args) {
     MyDeque<String> test = new MyDeque<String>(8);
     System.out.println(test);
     // System.out.println(test.size());
-    test.addFirst("c");
-    System.out.println(test);
-    test.removeFirst();
-    System.out.println(test);
-    test.addFirst("b");
-    System.out.println(test);
-    test.addFirst("a");
-    System.out.println(test);
-    test.addLast("d");
-    System.out.println(test);
-    test.addLast("e");
-    System.out.println(test);
-    test.removeFirst();
-    System.out.println(test);
-    test.removeLast();
-    System.out.println(test);
-    System.out.println(test.getFirst());
-    System.out.println(test.getLast());
+    String str = "abcdefghijk";
+    for (int i =  0;i < str.length();i++) {
+      test.addFirst(str.substring(i,i+1));
+      System.out.println(test);
+    }
+    // test.addFirst("c");
+    // // test.removeFirst();
+    // System.out.println(test);
+    // test.addFirst("b");
+    // System.out.println(test);
+    // test.addFirst("a");
+    // System.out.println(test);
+    // test.addLast("d");
+    // System.out.println(test);
+    // test.addLast("e");
+    // System.out.println(test);
+    // test.removeFirst();
+    // System.out.println(test);
+    // test.removeLast();
+    // System.out.println(test);
+    // System.out.println(test.getFirst());
+    // System.out.println(test.getLast());
   }
 }
