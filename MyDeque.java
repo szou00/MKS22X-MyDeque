@@ -52,6 +52,7 @@ public class MyDeque<E>{
       if (start == 0) {
         data[size-1] = element;
         start = size-1;
+        end++;
         return;
       }
       if (data[start-1] != null) {
@@ -59,13 +60,15 @@ public class MyDeque<E>{
       }
       data[start-1] = element;
       start--;
+      end++;
     }
   }
 
   public void addLast(E element){
-    if (size == end) {
+    if (data[end+1] != null) {
       resize();
     }
+    data[end+1] = element;
   }
   // public E removeFirst(){ }
   // public E removeLast(){ }
@@ -87,11 +90,13 @@ public class MyDeque<E>{
     MyDeque<String> test = new MyDeque<String>(8);
     System.out.println(test);
     // System.out.println(test.size());
-    test.addFirst("h");
-    System.out.println(test);
     test.addFirst("c");
     System.out.println(test);
-    test.addFirst("d");
+    test.addFirst("b");
+    System.out.println(test);
+    test.addFirst("a");
+    System.out.println(test);
+    test.addLast("d");
     System.out.println(test);
   }
 }
