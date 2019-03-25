@@ -49,11 +49,16 @@ public class MyDeque<E>{
       end = 0;
     }
     else {
-      if (data[size-1] != null) {
+      if (start == 0) {
+        data[size-1] = element;
+        start = size-1;
+        return;
+      }
+      if (data[start-1] != null) {
         resize();
       }
-      data[size-1] = element;
-      start = size-1;
+      data[start-1] = element;
+      start--;
     }
   }
 
@@ -67,7 +72,16 @@ public class MyDeque<E>{
   // public E getFirst(){ }
   // public E getLast(){ }
 
-  public void resize() {}
+  @SuppressWarnings("unchecked")
+  public void resize() {
+    E[] newData = data = (E[])new Object[size *2];
+    for (int i = start; i<size;i++) {
+      newData[i] = data[i];
+    }
+    for (int i = 0; i<start;i++) {
+      newData[i] = data[i];
+    }
+  }
 
   public static void main(String[] args) {
     MyDeque<String> test = new MyDeque<String>(8);
