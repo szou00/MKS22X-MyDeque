@@ -6,16 +6,16 @@ public class MyDeque<E>{
   public MyDeque(){
     data = (E[])new Object[10];
     size = 0;
-    start = 0;
-    end = 0;
+    start = -1;
+    end = -1;
   }
 
   @SuppressWarnings("unchecked")
   public MyDeque(int initialCapacity){
     data = (E[])new Object[initialCapacity];
     size = initialCapacity;
-    start = 0;
-    end = 0;
+    start = -1;
+    end = -1;
   }
 
   public int size(){
@@ -23,7 +23,10 @@ public class MyDeque<E>{
   }
 
   public String toString(){
-    String ans = "";
+    String ans = "{";
+    if (start == -1) {
+      return ans + "}";
+    }
     for (int i = start; i < size;i++) {
       if (data[i] != null) {
         ans += data[i] + " ";
@@ -36,16 +39,19 @@ public class MyDeque<E>{
         }
       }
     }
-    return ans;
+    return ans + "}";
   }
 
   public void addFirst(E element){
-    if (start == 0) {
-      data[start] = element;
-      start+=1;
-      end+=1;
+    if (start == -1) {
+      data[0] = element;
+      start = 0;
+      end = 0;
     }
     else {
+      if (data[size-1] != null) {
+        resize();
+      }
       data[size-1] = element;
       start = size-1;
     }
