@@ -108,7 +108,7 @@ public class MyDeque<E>{
     }
     data[start] = null;
     start++;
-    System.out.println("start: " + start + " end: " + end + " size: " + size);
+    // System.out.println("start: " + start + " end: " + end + " size: " + size);
     return first;
   }
 
@@ -169,7 +169,11 @@ public class MyDeque<E>{
       System.out.println(test);
     }
     for (int i =  0;i < str.length();i++) {
-      System.out.println(test.removeFirst());
+      test.removeFirst();
+      System.out.println(test);
+    }
+    for (int i =  0;i < str.length();i++) {
+      test.addLast(str.substring(i,i+1));
       System.out.println(test);
     }
     // test.addFirst("c");
