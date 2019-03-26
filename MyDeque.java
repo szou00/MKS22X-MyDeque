@@ -49,23 +49,25 @@ public class MyDeque<E>{
     if (element == null) {
       throw new NullPointerException();
     }
+    System.out.println("start: " + start + " end: " + end + " size: " + size);
     if (start == -1) {
       data[0] = element;
       start = 0;
       end = 0;
     }
     else {
+      if (start != 0 && data[start-1] != null) {
+        // System.out.println("resizing");
+        resize();
+      }
       if (start == 0) {
+        // System.out.println("start is 0");
         data[size-1] = element;
         start = size-1;
         end++;
         return;
       }
-      if (data[start-1] != null) {
-        System.out.println("resizing");
-        resize();
-      }
-      // System.out.println(Arrays.toString(data));
+      System.out.println(Arrays.toString(data));
       data[start-1] = element;
       start--;
       end++;
@@ -130,18 +132,23 @@ public class MyDeque<E>{
 
   @SuppressWarnings("unchecked")
   public void resize() {
-    E[] newData = data = (E[])new Object[size *2];
+    E[] newData = (E[])new Object[size *2];
     String ans = "";
+    int index = 0;
     for (int i = start; i<size;i++) {
-      newData[i] = data[i];
+      newData[index] = data[i];
+      index++;
     }
     if (start > 0) {
       for (int i = 0; i < start; i++) {
-        newData[i] = data[i];
+        newData[index] = data[i];
+        index++;
       }
     }
+    // System.out.println("reassigning");
     start = 0;
-    end = data.length;
+    end = data.length-1;
+    size = size * 2;
     data = newData;
 
   }
