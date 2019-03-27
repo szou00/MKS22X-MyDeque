@@ -64,13 +64,11 @@ public class MyDeque<E>{
         // System.out.println("start is 0");
         data[size-1] = element;
         start = size-1;
-        end++;
         return;
       }
       // System.out.println(Arrays.toString(data));
       data[start-1] = element;
       start--;
-      end++;
     }
   }
 
@@ -83,9 +81,11 @@ public class MyDeque<E>{
     }
     data[end+1] = element;
     end++;
+    System.out.println(Arrays.toString(data));
   }
 
   public E removeFirst(){
+    // System.out.println("start: " + start + " end: " + end + " size: " + size);
     if (start == -1) {
       throw new NoSuchElementException();
     }
@@ -106,9 +106,14 @@ public class MyDeque<E>{
       start = 0;
       return first;
     }
+    if (start == end) { //when everything is removed, the list is empty
+      data[start] = null;
+      start = -1;
+      end = -1;
+      return first;
+    }
     data[start] = null;
     start++;
-    // System.out.println("start: " + start + " end: " + end + " size: " + size);
     return first;
   }
 
@@ -172,10 +177,10 @@ public class MyDeque<E>{
       test.removeFirst();
       System.out.println(test);
     }
-    for (int i =  0;i < str.length();i++) {
-      test.addLast(str.substring(i,i+1));
-      System.out.println(test);
-    }
+    // for (int i =  0;i < str.length();i++) {
+    //   test.addLast(str.substring(i,i+1));
+    //   System.out.println(test);
+    // }
     // test.addFirst("c");
     // // test.removeFirst();
     // System.out.println(test);
