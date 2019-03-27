@@ -76,8 +76,14 @@ public class MyDeque<E>{
     if (element == null) {
       throw new NullPointerException();
     }
-    if (data[end+1] != null) {
+    if (end+1 >= data.length || data[end+1] != null) {
       resize();
+    }
+    if (end == -1) {
+      data[0] = element;
+      end++;
+      start = 0;
+      return;
     }
     data[end+1] = element;
     end++;
@@ -169,18 +175,18 @@ public class MyDeque<E>{
     System.out.println(test);
     // System.out.println(test.size());
     String str = "abcdefghijk";
-    for (int i =  0;i < str.length();i++) {
-      test.addFirst(str.substring(i,i+1));
-      System.out.println(test);
-    }
-    for (int i =  0;i < str.length();i++) {
-      test.removeFirst();
-      System.out.println(test);
-    }
     // for (int i =  0;i < str.length();i++) {
-    //   test.addLast(str.substring(i,i+1));
+    //   test.addFirst(str.substring(i,i+1));
     //   System.out.println(test);
     // }
+    // for (int i =  0;i < str.length();i++) {
+    //   test.removeFirst();
+    //   System.out.println(test);
+    // }
+    for (int i =  0;i < str.length();i++) {
+      test.addLast(str.substring(i,i+1));
+      System.out.println(test);
+    }
     // test.addFirst("c");
     // // test.removeFirst();
     // System.out.println(test);
