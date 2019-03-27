@@ -76,63 +76,78 @@ public class MyDeque<E>{
   }
 
   public void addLast(E element){
-    if (element == null) {
+    if (element == null) { //if element is null, throw an exception
       throw new NullPointerException();
     }
-    if (end+1 >= data.length || data[end+1] != null) {
+    if (end+1 >= data.length || data[end+1] != null) { //if there's no where else to add it, resize
       resize();
     }
-    if (end == -1) {
-      data[0] = element;
-      end++;
+    if (end == -1) { //if it's an empty list
+      data[0] = element; //add to the list;
+      end++; //increase both start and end by one
       start = 0;
+      size++; //increase size by one
       return;
     }
-    data[end+1] = element;
-    end++;
-    System.out.println(Arrays.toString(data));
+    data[end+1] = element; //otherwise, add to the end of the list
+    end++; //increase end
+    size++; //increase size
+    // System.out.println(Arrays.toString(data));
   }
 
   public E removeFirst(){
     // System.out.println("start: " + start + " end: " + end + " size: " + size);
-    if (start == -1) {
+    if (start == -1) { //if it's an empty list, throw an exception
       throw new NoSuchElementException();
     }
-    E first = data[start];
+    E first = data[start]; //store the targeted element
     // System.out.println(Arrays.toString(data));
-    if (start == 0) {
-      data[start] = null;
-      if (end != start+1) {
-        start++;
+    if (start == 0) { //if start is at the beg
+      data[start] = null; //remove it
+      if (end != start+1) { //if there's more to the list
+        start++; //the next element becomes the first one
       }
       else {
-        start--;
+        start--; //otherwise start becomes -1
       }
-      return first;
+      size--; //size decreases
+      return first; //return the element
     }
-    if (start == size-1) {
-      data[start] = null;
-      start = 0;
-      return first;
+    if (start == data.length-1) { //if start is the end of the list
+      data[start] = null; //remove element
+      start = 0; //start goes back to beg
+      size--; //size decreases
+      return first; //return element
     }
     if (start == end) { //when everything is removed, the list is empty
-      data[start] = null;
-      start = -1;
+      data[start] = null; //element is removed
+      start = -1; //both start and end decrease
       end = -1;
+      size--; //size decreases
       return first;
     }
-    data[start] = null;
-    start++;
+    data[start] = null; //for all other cases, remove element
+    start++; //start increases
+    size--; //size decreases
     return first;
   }
 
   public E removeLast() {
-    if (start == -1) {
+    if (start == -1) { //if list is empty, throw exception
       throw new NoSuchElementException();
     }
-    E last = data[end];
-    data[end] = null;
+    E last = data[end]; //store the element
+    if (end == 0) {
+      if (start > 0) {
+        data[end] = null;
+        end = data.length-1;
+        size--;
+      }
+    }
+    data[end] = null; //remove it
     end--;
+    size--; //size decreases
+    System.out.println(Arrays.toString(data));
     return last;
   }
 
@@ -190,10 +205,10 @@ public class MyDeque<E>{
     //   test.addLast(str.substring(i,i+1));
     //   System.out.println(test);
     // }
-    // for (int i =  0;i < str.length();i++) {
-    //   test.removeLast();
-    //   System.out.println(test);
-    // }
+    for (int i =  0;i < str.length();i++) {
+      test.removeLast();
+      System.out.println(test);
+    }
     // test.addFirst("c");
     // // test.removeFirst();
     // System.out.println(test);
