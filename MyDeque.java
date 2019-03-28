@@ -136,18 +136,20 @@ public class MyDeque<E>{
     if (start == -1) { //if list is empty, throw exception
       throw new NoSuchElementException();
     }
+    // System.out.println("start: " + start + " end: " + end + " size: " + size);
     E last = data[end]; //store the element
-    if (end == 0) {
-      if (start > 0) {
-        data[end] = null;
-        end = data.length-1;
-        size--;
+    if (end == 0) { //if the end is at the beg of the list
+      if (start > 0) { //if there's more to the list
+        data[end] = null; //remove the end
+        end = data.length-1; //the element at the end of the list becomes the end
+        size--; //size decreases
+        return last;
       }
-    }
+    } //otherwise
     data[end] = null; //remove it
-    end--;
+    end--; //end just becomes the end
     size--; //size decreases
-    System.out.println(Arrays.toString(data));
+    // System.out.println(Arrays.toString(data));
     return last;
   }
 
@@ -183,7 +185,6 @@ public class MyDeque<E>{
     // System.out.println("reassigning");
     start = 0;
     end = data.length-1;
-    size = size * 2;
     data = newData;
 
   }
@@ -195,7 +196,7 @@ public class MyDeque<E>{
     String str = "abcdefghijk";
     for (int i =  0;i < str.length();i++) {
       test.addFirst(str.substring(i,i+1));
-      System.out.println(test);
+      // System.out.println(test);
     }
     // for (int i =  0;i < str.length();i++) {
     //   test.removeFirst();
