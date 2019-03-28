@@ -9,16 +9,16 @@ public class MyDeque<E>{
   public MyDeque(){
     data = (E[])new Object[10];
     size = 0;
-    start = -1;
-    end = -1;
+    start = 0;
+    end = 0;
   }
 
   @SuppressWarnings("unchecked")
   public MyDeque(int initialCapacity){
     data = (E[])new Object[initialCapacity];
     size = 0;
-    start = -1;
-    end = -1;
+    start = 0;
+    end = 0;
   }
 
   public int size(){
@@ -50,29 +50,27 @@ public class MyDeque<E>{
       throw new NullPointerException();
     }
     // System.out.println("start: " + start + " end: " + end + " size: " + size);
-    if (start == -1) { //if the list is empty
-      data[0] = element; //add to the list
-      start = 0; //both start and end get 0
-      end = 0;
+    if (size==0) { //if the list is empty
+      data[start] = element; //add to the list
       size++; //size increases
+      return;
     }
-    else {
-      if (start != 0 && data[start-1] != null) { //if start isn't the beg of the list and there's no more
-        // System.out.println("resizing");
-        resize(); //space to add to the front, resize
-      }
-      if (start == 0) { //if start is the beg already
-        // System.out.println("start is 0");
-        data[data.length-1] = element; //add element to the end
-        start = data.length-1; //move start
-        size++;
-        return;
-      }
-      // System.out.println(Arrays.toString(data));
-      data[start-1] = element; //otherwise keeps adding to the one before start
-      start--;
+    if (size==data.length-1) { //if there's no more space in the list
+      // System.out.println("resizing");
+      resize(); //resize
+    }
+    if (start == 0) { //if start is the beg already
+      // System.out.println("start is 0");
+      data[data.length-1] = element; //add element to the end
+      start = data.length-1; //move start
       size++;
+      return;
     }
+      // System.out.println(Arrays.toString(data));
+    data[start-1] = element; //otherwise keeps adding to the one before start
+    start--;
+    size++;
+    return;
   }
 
   public void addLast(E element){
@@ -97,7 +95,7 @@ public class MyDeque<E>{
 
   public E removeFirst(){
     // System.out.println("start: " + start + " end: " + end + " size: " + size);
-    if (start == -1) { //if it's an empty list, throw an exception
+    if (size==0) { //if it's an empty list, throw an exception
       throw new NoSuchElementException();
     }
     E first = data[start]; //store the targeted element
@@ -133,7 +131,7 @@ public class MyDeque<E>{
   }
 
   public E removeLast() {
-    if (start == -1) { //if list is empty, throw exception
+    if (size==0) { //if list is empty, throw exception
       throw new NoSuchElementException();
     }
     // System.out.println("start: " + start + " end: " + end + " size: " + size);
@@ -154,37 +152,41 @@ public class MyDeque<E>{
   }
 
   public E getFirst(){
-    if (start == -1) {
+    if (size==0) {
       throw new NoSuchElementException();
     }
     return data[start];
   }
 
   public E getLast() {
-    if (start == -1) {
+    if (size==0) {
       throw new NoSuchElementException();
     }
     return data[end];
   }
 
+  //resizing
   @SuppressWarnings("unchecked")
   public void resize() {
+    System.out.println(Arrays.toString(data));
     E[] newData = (E[])new Object[size *2];
     String ans = "";
     int index = 0;
-    for (int i = start; i<size;i++) {
+    for (int i = start; i<data.length;i++) {
+      // System.out.println(Arrays.toString(newData));
       newData[index] = data[i];
       index++;
     }
     if (start > 0) {
       for (int i = 0; i < start; i++) {
+        // System.out.println(Arrays.toString(newData));
         newData[index] = data[i];
         index++;
       }
     }
     // System.out.println("reassigning");
     start = 0;
-    end = data.length-1;
+    end = size;
     data = newData;
 
   }
@@ -196,7 +198,7 @@ public class MyDeque<E>{
     String str = "abcdefghijk";
     for (int i =  0;i < str.length();i++) {
       test.addFirst(str.substring(i,i+1));
-      // System.out.println(test);
+      System.out.println(test);
     }
     // for (int i =  0;i < str.length();i++) {
     //   test.removeFirst();
@@ -206,10 +208,10 @@ public class MyDeque<E>{
     //   test.addLast(str.substring(i,i+1));
     //   System.out.println(test);
     // }
-    for (int i =  0;i < str.length();i++) {
-      test.removeLast();
-      System.out.println(test);
-    }
+    // for (int i =  0;i < str.length();i++) {
+    //   test.removeLast();
+    //   System.out.println(test);
+    // }
     // test.addFirst("c");
     // // test.removeFirst();
     // System.out.println(test);
