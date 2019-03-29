@@ -27,7 +27,7 @@ public class MyDeque<E>{
 
   public String toString(){
     String ans = "{"; //ans will store the contents of the string
-    if (start == -1) { //if there's nothing
+    if (size == 0) { //if there's nothing
       return ans + "}"; //only {} is printed
     }
     for (int i = start; i < data.length;i++) { //otherwise, values from start to the end
@@ -77,12 +77,12 @@ public class MyDeque<E>{
     if (element == null) { //if element is null, throw an exception
       throw new NullPointerException();
     }
+    System.out.println("start: " + start + " end: " + end + " size: " + size);
     if (end+1 >= data.length || data[end+1] != null) { //if there's no where else to add it, resize
       resize();
     }
-    if (end == -1) { //if it's an empty list
+    if (size==0) { //if it's an empty list
       data[0] = element; //add to the list;
-      end++; //increase both start and end by one
       start = 0;
       size++; //increase size by one
       return;
@@ -94,7 +94,7 @@ public class MyDeque<E>{
   }
 
   public E removeFirst(){
-    // System.out.println("start: " + start + " end: " + end + " size: " + size);
+    System.out.println("start: " + start + " end: " + end + " size: " + size);
     if (size==0) { //if it's an empty list, throw an exception
       throw new NoSuchElementException();
     }
@@ -119,8 +119,8 @@ public class MyDeque<E>{
     }
     if (start == end) { //when everything is removed, the list is empty
       data[start] = null; //element is removed
-      start = -1; //both start and end decrease
-      end = -1;
+      start = 0; //both start and end go back to zero
+      end = 0;
       size--; //size decreases
       return first;
     }
@@ -134,7 +134,7 @@ public class MyDeque<E>{
     if (size==0) { //if list is empty, throw exception
       throw new NoSuchElementException();
     }
-    // System.out.println("start: " + start + " end: " + end + " size: " + size);
+    System.out.println("start: " + start + " end: " + end + " size: " + size);
     E last = data[end]; //store the element
     if (end == 0) { //if the end is at the beg of the list
       if (start > 0) { //if there's more to the list
@@ -168,10 +168,13 @@ public class MyDeque<E>{
   //resizing
   @SuppressWarnings("unchecked")
   public void resize() {
-    System.out.println(Arrays.toString(data));
+    // System.out.println(Arrays.toString(data));
     E[] newData = (E[])new Object[size *2];
     String ans = "";
     int index = 0;
+    // System.out.print("data: ");
+    // System.out.print(Arrays.toString(data));
+    // System.out.println("start: " + start + " end: " + end + " size: " + size);
     for (int i = start; i<data.length;i++) {
       // System.out.println(Arrays.toString(newData));
       newData[index] = data[i];
@@ -200,10 +203,10 @@ public class MyDeque<E>{
       test.addFirst(str.substring(i,i+1));
       System.out.println(test);
     }
-    // for (int i =  0;i < str.length();i++) {
-    //   test.removeFirst();
-    //   System.out.println(test);
-    // }
+    for (int i =  0;i < str.length();i++) {
+      test.removeFirst();
+      System.out.println(test);
+    }
     // for (int i =  0;i < str.length();i++) {
     //   test.addLast(str.substring(i,i+1));
     //   System.out.println(test);
