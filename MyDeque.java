@@ -31,6 +31,7 @@ public class MyDeque<E>{
       return ans + "}"; //only {} is printed
     }
     for (int i = start; i < data.length;i++) { //otherwise, values from start to the end
+      System.out.println("i: " + i);
       if (data[i] != null) { //besides null
         ans += data[i] + " "; //are added
       }
@@ -77,13 +78,12 @@ public class MyDeque<E>{
     if (element == null) { //if element is null, throw an exception
       throw new NullPointerException();
     }
-    System.out.println("start: " + start + " end: " + end + " size: " + size);
+    // System.out.println("start: " + start + " end: " + end + " size: " + size);
     if (end+1 >= data.length || data[end+1] != null) { //if there's no where else to add it, resize
       resize();
     }
     if (size==0) { //if it's an empty list
       data[0] = element; //add to the list;
-      start = 0;
       size++; //increase size by one
       return;
     }
@@ -94,7 +94,7 @@ public class MyDeque<E>{
   }
 
   public E removeFirst(){
-    System.out.println("start: " + start + " end: " + end + " size: " + size);
+    // System.out.println("start: " + start + " end: " + end + " size: " + size);
     if (size==0) { //if it's an empty list, throw an exception
       throw new NoSuchElementException();
     }
@@ -104,9 +104,6 @@ public class MyDeque<E>{
       data[start] = null; //remove it
       if (end != start+1) { //if there's more to the list
         start++; //the next element becomes the first one
-      }
-      else {
-        start--; //otherwise start becomes -1
       }
       size--; //size decreases
       return first; //return the element
@@ -134,7 +131,7 @@ public class MyDeque<E>{
     if (size==0) { //if list is empty, throw exception
       throw new NoSuchElementException();
     }
-    System.out.println("start: " + start + " end: " + end + " size: " + size);
+    // System.out.println("start: " + start + " end: " + end + " size: " + size);
     E last = data[end]; //store the element
     if (end == 0) { //if the end is at the beg of the list
       if (start > 0) { //if there's more to the list
@@ -169,7 +166,7 @@ public class MyDeque<E>{
   @SuppressWarnings("unchecked")
   public void resize() {
     // System.out.println(Arrays.toString(data));
-    E[] newData = (E[])new Object[size *2];
+    E[] newData = (E[])new Object[data.length *2];
     String ans = "";
     int index = 0;
     // System.out.print("data: ");
@@ -199,14 +196,14 @@ public class MyDeque<E>{
     System.out.println(test);
     // System.out.println(test.size());
     String str = "abcdefghijk";
-    for (int i =  0;i < str.length();i++) {
-      test.addFirst(str.substring(i,i+1));
-      System.out.println(test);
-    }
-    for (int i =  0;i < str.length();i++) {
-      test.removeFirst();
-      System.out.println(test);
-    }
+    // for (int i =  0;i < str.length();i++) {
+    //   test.addFirst(str.substring(i,i+1));
+    //   System.out.println(test);
+    // }
+    // for (int i =  0;i < str.length();i++) {
+    //   test.removeFirst();
+    //   System.out.println(test);
+    // }
     // for (int i =  0;i < str.length();i++) {
     //   test.addLast(str.substring(i,i+1));
     //   System.out.println(test);
@@ -216,21 +213,21 @@ public class MyDeque<E>{
     //   System.out.println(test);
     // }
     // test.addFirst("c");
-    // // test.removeFirst();
+    // test.removeFirst();
     // System.out.println(test);
     // test.addFirst("b");
     // System.out.println(test);
     // test.addFirst("a");
     // System.out.println(test);
-    // test.addLast("d");
-    // System.out.println(test);
-    // test.addLast("e");
-    // System.out.println(test);
-    // test.removeFirst();
-    // System.out.println(test);
-    // test.removeLast();
-    // System.out.println(test);
-    // System.out.println(test.getFirst());
-    // System.out.println(test.getLast());
+    test.addLast("d");
+    System.out.println(test);
+    test.addLast("e");
+    System.out.println(test);
+    test.removeFirst();
+    System.out.println(test);
+    test.removeLast();
+    System.out.println(test);
+    System.out.println(test.getFirst());
+    System.out.println(test.getLast());
   }
 }
