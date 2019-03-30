@@ -31,7 +31,7 @@ public class MyDeque<E>{
       return ans + "}"; //only {} is printed
     }
     for (int i = start; i < data.length;i++) { //otherwise, values from start to the end
-      System.out.println("i: " + i);
+      // System.out.println("i: " + i);
       if (data[i] != null) { //besides null
         ans += data[i] + " "; //are added
       }
@@ -142,8 +142,10 @@ public class MyDeque<E>{
       }
     } //otherwise
     data[end] = null; //remove it
-    end--; //end just becomes the end
     size--; //size decreases
+    if (end!= 0) {
+      end--; //the end just becomes the end
+    }
     // System.out.println(Arrays.toString(data));
     return last;
   }
@@ -192,42 +194,50 @@ public class MyDeque<E>{
   }
 
   public static void main(String[] args) {
-    MyDeque<String> test = new MyDeque<String>(8);
-    System.out.println(test);
-    // System.out.println(test.size());
-    String str = "abcdefghijk";
-    // for (int i =  0;i < str.length();i++) {
-    //   test.addFirst(str.substring(i,i+1));
-    //   System.out.println(test);
-    // }
-    // for (int i =  0;i < str.length();i++) {
-    //   test.removeFirst();
-    //   System.out.println(test);
-    // }
-    // for (int i =  0;i < str.length();i++) {
-    //   test.addLast(str.substring(i,i+1));
-    //   System.out.println(test);
-    // }
-    // for (int i =  0;i < str.length();i++) {
-    //   test.removeLast();
-    //   System.out.println(test);
-    // }
-    // test.addFirst("c");
-    // test.removeFirst();
-    // System.out.println(test);
-    // test.addFirst("b");
-    // System.out.println(test);
-    // test.addFirst("a");
-    // System.out.println(test);
-    test.addLast("d");
-    System.out.println(test);
-    test.addLast("e");
-    System.out.println(test);
-    test.removeFirst();
-    System.out.println(test);
-    test.removeLast();
-    System.out.println(test);
-    System.out.println(test.getFirst());
-    System.out.println(test.getLast());
+    try {
+      MyDeque<Integer> test = new MyDeque<Integer>(8);
+      System.out.println(test);
+      // System.out.println(test.size());
+      String str = "abcdefghijk";
+      // for (int i =  0;i < str.length();i++) {
+      //   test.addFirst(str.substring(i,i+1));
+      //   System.out.println(test);
+      // }
+      // for (int i =  0;i < str.length();i++) {
+      //   test.removeFirst();
+      //   System.out.println(test);
+      // }
+      // for (int i =  0;i < str.length();i++) {
+      //   test.addLast(str.substring(i,i+1));
+      //   System.out.println(test);
+      // }
+      // for (int i =  0;i < str.length();i++) {
+      //   test.removeLast();
+      //   System.out.println(test);
+      // }
+      // test.addFirst("c");
+      // test.removeFirst();
+      // System.out.println(test);
+      // test.addFirst("b");
+      // System.out.println(test);
+      // test.addFirst("a");
+      // System.out.println(test);
+      // test.addLast("d");
+      // System.out.println(test);
+      // test.addLast("e");
+      // System.out.println(test);
+      // test.removeFirst();
+      // System.out.println(test);
+      // test.removeLast();
+      // System.out.println(test);
+      // System.out.println(test.getFirst());
+      // System.out.println(test.getLast());
+      test.addFirst(1);
+      test.addLast(0);
+      System.out.println(test);
+    }
+    catch (NoSuchElementException e) {
+      System.out.println("No Such Element");
+    }
   }
 }
