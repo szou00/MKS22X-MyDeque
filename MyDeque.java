@@ -232,7 +232,7 @@ public class MyDeque<E>{
       // System.out.println(test);
       // System.out.println(test.getFirst());
       // System.out.println(test.getLast());
-      test.addFirst(1);
+      test.addLast(1);
       test.addLast(0);
       System.out.println(test);
     }
