@@ -56,13 +56,17 @@ public class Calculator{
         i+=1;
         // System.out.println(operations);
       }
-      return operations.getFirst(); //there should only be one element left in the array ?? so return that
+      if (operations.size() != 1) { //in case the equation input wasn't very valid -- have this or not?
+        System.out.println("Your equation didn't evaluate fully! Either an extra operation or number :) ");
+      }
+      return operations.getLast(); //there should only be one element left in the array ?? so return that
     }
 
     public static void main(String[] args) {
-      System.out.println(eval("10 2.0 +"));
-      System.out.println(eval("11 3 - 4 + 2.5 *"));
-      System.out.println(eval("8 2 + 99 9 - * 2 + 9 -"));
-      System.out.println(eval("1 2 3 4 5 + * - -"));
+      // System.out.println(eval("10 2.0 +"));
+      // System.out.println(eval("11 3 - 4 + 2.5 *"));
+      // System.out.println(eval("8 2 + 99 9 - * 2 + 9 -"));
+      // System.out.println(eval("1 2 3 4 5 + * - -"));
+      // System.out.println(eval("4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 + + + + + + + + + + + + + + + + + + + + + + + + + +"));
     }
 }
